@@ -18,7 +18,6 @@ module('Integration | Component | rental', function(hooks) {
     assert.dom('article .detail.type').includesText('Standalone');
     assert.dom('article .detail.location').includesText('San Francisco');
     assert.dom('article .detail.bedrooms').includesText('15');
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('article .image').exists();
   });
 });
