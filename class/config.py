@@ -1,5 +1,4 @@
 class Configuration(object):
-
     """
         The class basic configuration of the Car
     """
@@ -11,10 +10,17 @@ class Configuration(object):
         self.weight = weight
         self.color = color
         self.cc = cc
-    
+
     def __str__(self):
-        return f"Car Name {self.name}\nBrand {self.brand}"
+        return f"Car Name: {self.name}\nBrand: {self.brand}"
 
 
-if __name__ == "__main":
-    car = Configuration()
+class Car(object):
+
+    def my_car(self):
+        _car = Configuration("BMW", 2000, "New", "50000", "Red", 40404)
+        return _car
+
+
+car = Car()
+print(car.my_car())
