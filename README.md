@@ -1,5 +1,5 @@
 # oop
-0bject Oriented Programming.
+Object Oriented Programming.
 
 > The repo basically creates OOP programming for all. Somethings when I something missing then I follow the repo for my learning purpose.
 
