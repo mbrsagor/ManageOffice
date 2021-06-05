@@ -13,13 +13,15 @@ class Human(object):
 
 class Men(object):
 
-    def boy(self):
+    @staticmethod
+    def boy():
         return Human('Sagor', 26, 'Male', 5.5, "51.30 KG", False)
 
 
 class Woman(object):
 
-    def girl(self):
+    @staticmethod
+    def girl():
         return Human("Isha", 3, "Female", 3.0, "12KG", False)
 
 
