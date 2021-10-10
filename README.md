@@ -5,8 +5,10 @@ Object Oriented Programming.
 
 Create virtualenv in your project.
 ```base
-git clone https://github.com/mbrsagor/oop.git
+git clone https://github.com/mbrsagor/MachineLearning.git
 cd MachineLearning
 virtualenv venv --python=python3.8
 source venv/bin/activate
 ```
+
+###### For the university project purpose I'm learning `ML`.
