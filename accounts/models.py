@@ -14,8 +14,7 @@ class DomainEntity(models.Model):
 
 
 class User(AbstractUser):
-    pin = models.CharField(max_length=15, validators=[MinValueValidator(4), MaxValueValidator(6)], unique=True)
-    employee = models.IntegerField(choices=Types.employee_types(), default=Types.FULLTIME.value)
+    pin = models.IntegerField(unique=True)
     role = models.IntegerField(choices=Roles.select_role(), default=Roles.EMPLOYEE.value)
 
     objects = UserManager()
@@ -37,6 +36,7 @@ class Profile(DomainEntity):
     emergency_phn_num = models.IntegerField(unique=True, blank=True, null=True,
                                             validators=[MinValueValidator(11), MaxValueValidator(14)])
     address = models.TextField(default='')
+    employee = models.IntegerField(choices=Types.employee_types(), default=Types.FULLTIME.value)
     bank_account = models.CharField(max_length=20, blank=True, null=True)
     bank_name = models.TextField(default='')
     eduction = models.TextField(help_text='add your education qualification')

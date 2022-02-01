@@ -10,13 +10,14 @@ SUPERUSER_LIFETIME = datetime.timedelta(minutes=90)
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
+    # password = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Password'}),
     password2 = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Confirm Password'},
                                       write_only=True)
 
     class Meta:
         model = User
         fields = (
-            'id', 'username', 'email', 'pin', 'employee', 'role', 'password', 'password2'
+            'id', 'username', 'email', 'pin', 'role', 'password', 'password2'
         )
 
     def validate(self, data):
@@ -27,11 +28,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        user = User.objects.create(
+        user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             pin=validated_data['pin'],
-            employee=validated_data['employee'],
             role=validated_data['role'],
             password=validated_data['password'],
         )
