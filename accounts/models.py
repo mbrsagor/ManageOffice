@@ -32,8 +32,10 @@ class Profile(DomainEntity):
     gender = models.IntegerField(choices=GENDER.select_gender(), default=GENDER.MALE.value)
     nid_number = models.IntegerField(unique=True, validators=[MinValueValidator(13), MaxValueValidator(17)], blank=True,
                                      null=True)
-    phn_num = models.IntegerField(unique=True)
-    emergency_phn_num = models.IntegerField(unique=True, blank=True, null=True)
+    phn_num = models.IntegerField(unique=True, blank=True, null=True,
+                                  validators=[MinValueValidator(11), MaxValueValidator(14)])
+    emergency_phn_num = models.IntegerField(unique=True, blank=True, null=True,
+                                            validators=[MinValueValidator(11), MaxValueValidator(14)])
     address = models.TextField(default='')
     bank_account = models.CharField(max_length=20, blank=True, null=True)
     bank_name = models.TextField(default='')
