@@ -14,13 +14,13 @@ class DomainEntity(models.Model):
 
 
 class User(AbstractUser):
-    pin = models.CharField(max_length=15, unique=True)
+    pin = models.CharField(max_length=15, validators=[MinValueValidator(4), MaxValueValidator(6)], unique=True)
     employee = models.IntegerField(choices=Types.employee_types(), default=Types.FULLTIME.value)
     role = models.IntegerField(choices=Roles.select_role(), default=Roles.EMPLOYEE.value)
 
     objects = UserManager()
     USERNAME_FIELD = 'pin'
-    REQUIRED_FIELDS = ['email', 'username']
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return self.pin
