@@ -26,3 +26,8 @@ pip install -r requirements.txt
 ./manage.py createsuperuser
 ./manage.py runserver
 ```
+
+#### Install postgresql
+```bash
+pip install psycopg2-binary
+```

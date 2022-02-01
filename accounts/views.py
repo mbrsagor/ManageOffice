@@ -8,7 +8,7 @@ from services.auth_validation_service import create_use_validation
 
 
 class UserRegistrationAPIView(views.APIView):
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = [permissions.AllowAny, ]
 
     def post(self, request):
         validate_error = create_use_validation(request.data)
