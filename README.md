@@ -1,14 +1,28 @@
-# Machine learning (ML)
-Object Oriented Programming.
+# Manage Office
 
-> The repo basically creates OOP programming for all. Somethings when I something missing then I follow the repo for my learning purpose.
+> The application is basically backend web API application which the application manage employees and office curriculum activities.
 
-Create virtualenv in your project.
-```base
-git clone https://github.com/mbrsagor/MachineLearning.git
-cd MachineLearning
-virtualenv venv --python=python3.8
-source venv/bin/activate
+Please follow the instructions to run the application your systems.
+#### Setup:
+```bash
+git clone https://github.com/mbrsagor/MnageOffice.git
+cd MnageOffice
+```
+Then create .env file and paste code from `example.env` file and add validate information.
+
+```bash
+|--> example.env
+|--> .env
 ```
 
-###### For the university project purpose I'm learning `ML`.
+###### Step 2:
+```bash
+virtualenv venv --python=python3.8
+source venv/bin/activate
+pip install -r requirements.txt
+./manage.py makemigrations accounts
+./manage.py migrate accounts
+./manage.py migrate
+./manage.py createsuperuser
+./manage.py runserver
+```
