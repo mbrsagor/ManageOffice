@@ -2,8 +2,10 @@ from datetime import date, datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
+from django.core.validators import MinValueValidator, MaxValueValidator
 
-from utils.role_type import Roles, Types
+from utils.role_type import Roles, Types, GENDER
+from .manager import UserManager
 
 
 class DomainEntity(models.Model):
@@ -11,11 +13,12 @@ class DomainEntity(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class User(AbstractUser, DomainEntity):
+class User(AbstractUser):
     pin = models.CharField(max_length=15, unique=True)
-    employee = models.ForeignKey(Types, on_delete=models.CASCADE, related_name='employee_type')
-    role = models.ForeignKey(Roles, on_delete=models.CASCADE, related_name='user_role')
+    employee = models.IntegerField(choices=Types.employee_types(), default=Types.FULLTIME.value)
+    role = models.IntegerField(choices=Roles.select_role(), default=Roles.EMPLOYEE.value)
 
+    objects = UserManager()
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'pin']
 
@@ -26,9 +29,11 @@ class User(AbstractUser, DomainEntity):
 class Profile(DomainEntity):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     date_of_birth = models.DateField(default=datetime.now)
-    nid_number = models.IntegerField(unique=True, max_length=15, blank=True, null=True)
-    phone_number = models.IntegerField(unique=True, max_length=11)
-    emergency_phone_number = models.IntegerField(unique=True, max_length=11, blank=True, null=True)
+    gender = models.IntegerField(choices=GENDER.select_gender(), default=GENDER.MALE.value)
+    nid_number = models.IntegerField(unique=True, validators=[MinValueValidator(13), MaxValueValidator(17)], blank=True,
+                                     null=True)
+    phn_num = models.IntegerField(unique=True)
+    emergency_phn_num = models.IntegerField(unique=True, blank=True, null=True)
     address = models.TextField(default='')
     bank_account = models.CharField(max_length=20, blank=True, null=True)
     bank_name = models.TextField(default='')
