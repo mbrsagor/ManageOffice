@@ -2,9 +2,10 @@ from rest_framework import views, status, permissions
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 
-from .serializers import UserCreateSerializer, CustomTokenObtainPairSerializer
-from utils.response import prepare_create_success_response, prepare_error_response
+from .serializers import UserCreateSerializer, CustomTokenObtainPairSerializer, UserSerializer, ProfileSerializer
+from utils.response import prepare_create_success_response, prepare_error_response, prepare_success_response
 from services.auth_validation_service import create_use_validation
+from .models import User, Profile
 
 
 class UserRegistrationAPIView(views.APIView):
@@ -23,3 +24,18 @@ class UserRegistrationAPIView(views.APIView):
 
 class LoginAPIView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+
+class ProfileAPIView(views.APIView):
+    # permission_classes = [permissions.IsAuthenticated, ]
+
+    def get(self, request):
+        try:
+            user = Profile.objects.get(id=self.request.user.id)
+            serializer = ProfileSerializer(user)
+            return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            queryset = User.objects.get(id=self.request.user.id)
+            serializer = UserSerializer(queryset)
+            return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)

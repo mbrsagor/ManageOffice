@@ -4,13 +4,13 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.utils import datetime_to_epoch
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import User
+from .models import User, Profile
 
 SUPERUSER_LIFETIME = datetime.timedelta(minutes=90)
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    # password = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Password'}),
+    password = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Password'}),
     password2 = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Confirm Password'},
                                       write_only=True)
 
@@ -36,6 +36,24 @@ class UserCreateSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
         )
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            '__all__'
+        )
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            'id', 'user', 'date_of_birth', 'gender', 'nid_number', 'phn_num', 'emergency_phn_num',
+            'address', 'employee', 'bank_account', 'bank_name', 'eduction', 'documents',
+            'profile_picture', 'created_at', 'updated_at'
+        ]
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
