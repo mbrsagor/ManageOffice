@@ -19,8 +19,8 @@ class User(AbstractUser):
     role = models.IntegerField(choices=Roles.select_role(), default=Roles.EMPLOYEE.value)
 
     objects = UserManager()
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'pin']
+    USERNAME_FIELD = 'pin'
+    REQUIRED_FIELDS = ['email', 'username']
 
     def __str__(self):
         return self.pin

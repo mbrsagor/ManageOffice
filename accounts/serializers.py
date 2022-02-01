@@ -5,7 +5,8 @@ from .models import User
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    password2 = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Confirm Password'}, write_only=True)
+    password2 = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Confirm Password'},
+                                      write_only=True)
 
     class Meta:
         model = User
