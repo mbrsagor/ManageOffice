@@ -1,4 +1,6 @@
 import datetime
+
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.utils import datetime_to_epoch
@@ -41,9 +43,9 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            '__all__'
-        )
+        fields = [
+            'id', 'username', 'pin', 'email', 'role', 'last_login', 'is_superuser', 'is_staff'
+        ]
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -54,6 +56,11 @@ class ProfileSerializer(serializers.ModelSerializer):
             'address', 'employee', 'bank_account', 'bank_name', 'eduction', 'documents',
             'profile_picture', 'created_at', 'updated_at'
         ]
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['user'] = UserSerializer(instance.user).data
+        return response
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -69,3 +76,42 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         if user:
             token.payload['exp'] = datetime_to_epoch(token.current_time + SUPERUSER_LIFETIME)
             return token
+
+
+class PasswordChangeSerializer(serializers.ModelSerializer):
+    old_password = serializers.CharField(write_only=True, required=True)
+    new_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    confirm_password = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'id', 'old_password', 'new_password', 'confirm_password'
+        )
+
+    def validate(self, attrs):
+        """
+        When user given new password & confirm password wrong the method will call.
+        :param attrs: new password and confirm password
+        :return: user_id
+        """
+        if attrs['new_password'] != attrs['confirm_password']:
+            raise serializers.ValidationError({'password': 'Sorry! password not match'})
+        return attrs
+
+    def validate_old_password(self, value):
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError({"old_password": "Old password is not correct"})
+        return value
+
+    def update(self, instance, validated_data):
+        """
+        When user input new password this method will save the password database.
+        :param instance:
+        :param validated_data:
+        :return:
+        """
+        instance.set_password(validated_data['new_password'])
+        instance.save()
+        return instance

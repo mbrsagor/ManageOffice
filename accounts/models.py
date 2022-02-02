@@ -22,7 +22,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.pin
+        return self.role
 
 
 class Profile(DomainEntity):
