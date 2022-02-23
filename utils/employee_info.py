@@ -11,6 +11,15 @@ class GENDER(IntEnum):
         return [(key.value, key.name) for key in cls]
 
 
+class MARITAL(IntEnum):
+    UNMARRIED = 0
+    MARRIED = 1
+
+    @classmethod
+    def select_status(cls):
+        return [(key.value, key.name) for key in cls]
+
+
 class Roles(IntEnum):
     """
     Here CEO is a superuser that's why here is not define CEO role.
