@@ -48,7 +48,7 @@ DEFAULT_APPS = [
 
 PROJECT_APPS = [
     'accounts',
-    'base',
+    'office',
 ]
 
 LIBRARY_APPS = [
