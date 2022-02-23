@@ -48,6 +48,7 @@ DEFAULT_APPS = [
 
 PROJECT_APPS = [
     'office',
+    'user',
 ]
 
 LIBRARY_APPS = [
