@@ -2,11 +2,13 @@ from django.urls import path
 from rest_framework import routers
 from office.views.department_view import DepartmentViewSet
 from office.views.designation_view import DesignationViewSet
+from office.views.bank_view import BankViewSet
 
 router = routers.DefaultRouter()
 
 router.register('department', DepartmentViewSet)
 router.register('designation', DesignationViewSet)
+router.register('bank', BankViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
