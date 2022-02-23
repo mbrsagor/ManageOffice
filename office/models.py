@@ -13,7 +13,7 @@ class BaseEntity(models.Model):
 
 
 class Department(BaseEntity):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Department(BaseEntity):
 
 
 class Designation(BaseEntity):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -29,7 +29,7 @@ class Designation(BaseEntity):
 
 
 class Bank(BaseEntity):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -38,8 +38,10 @@ class Bank(BaseEntity):
 
 class Profile(BaseEntity):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee')
-    departments = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='department', blank=True)
-    designations = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='designation', blank=True)
+    departments = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='department', blank=True,
+                                    null=True)
+    designations = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='designation', blank=True,
+                                     null=True)
     bank_name = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='employeeBank', blank=True, null=True)
     bank_account_number = models.CharField(max_length=20, blank=True, null=True)
     bank_branch_name = models.CharField(max_length=20, blank=True, null=True)

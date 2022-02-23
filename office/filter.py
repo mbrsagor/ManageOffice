@@ -1,0 +1,12 @@
+from django_filters import rest_framework as filters
+
+from office.models import Department
+
+
+class DepartmentFilter(filters.FilterSet):
+    name = filters.CharFilter(field_name='name')
+    is_active = filters.BooleanFilter(field_name='is_active')
+
+    class Meta:
+        model = Department
+        fields = ['name', 'is_active']
