@@ -50,7 +50,7 @@ class Pay(IntEnum):
     SALARY = 0
     BONUS = 1
     MEDICAL = 2
-    OTHERS = 3
+    LOAD = 3
 
     @classmethod
     def payment_types(cls):
@@ -60,6 +60,7 @@ class Pay(IntEnum):
 class Status(IntEnum):
     REGULAR = 0
     DUE = 1
+    OTHERS = 2
 
     @classmethod
     def pay_status(cls):

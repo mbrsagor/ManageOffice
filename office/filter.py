@@ -1,6 +1,7 @@
 from django_filters import rest_framework as filters
-
+from django.contrib.auth.models import User
 from office.models import Department, Designation, Bank, Payment
+from utils.employee_info import Pay
 
 
 class DepartmentFilter(filters.FilterSet):
@@ -31,8 +32,8 @@ class BankFilter(filters.FilterSet):
 
 
 class PaymentFilter(filters.FilterSet):
-    user = filters.ChoiceFilter(field_name='user')
-    bank_name = filters.ChoiceFilter(field_name='bank_name')
+    user = filters.ModelChoiceFilter(field_name='user', queryset=User.objects.all())
+    bank_name = filters.ModelChoiceFilter(field_name='bank_name', queryset=Bank.objects.all())
     pay_purpose = filters.ChoiceFilter(field_name='pay_purpose')
     amount = filters.NumberFilter(field_name='amount')
 

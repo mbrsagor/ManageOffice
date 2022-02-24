@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
 from office.models import Payment
+from user.serializers import UserSerializer
+from office.serializers.bank_serailizer import BankSerializer
 
 
 class PaymentSerializer(serializers.ModelSerializer):
@@ -19,6 +21,13 @@ class PaymentSerializer(serializers.ModelSerializer):
             'updated_at',
         ]
 
-    # def validate_title(self, value):
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['user'] = UserSerializer(instance.user).data
+        response['bank_name'] = BankSerializer(instance.bank_name).data
+        return response
+
+
+    # def validate_month(self, value):
     #     if len(value) <= 10:
-    #         raise serializers.ValidationError("Name should be more than 10 characters")
+    #         raise serializers.ValidationError("Salary has been already payment")

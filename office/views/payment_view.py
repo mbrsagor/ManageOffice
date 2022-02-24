@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, generics, permissions
 from django_filters import rest_framework as filters
 
 from office.models import Payment
@@ -8,6 +8,13 @@ from office.filter import PaymentFilter
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+    permission_classes = [permissions.IsAdminUser]
+    pagination_class = StandardResultsSetPagination
+
+
+class PaymentSearchFilterView(generics.ListAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = [permissions.IsAdminUser]
