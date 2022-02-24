@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from office.models import Department, Designation, Bank
+from office.models import Department, Designation, Bank, Payment
 
 
 class DepartmentFilter(filters.FilterSet):
@@ -28,3 +28,14 @@ class BankFilter(filters.FilterSet):
     class Meta:
         model = Bank
         fields = ['name', 'is_active']
+
+
+class PaymentFilter(filters.FilterSet):
+    user = filters.ChoiceFilter(field_name='user')
+    bank_name = filters.ChoiceFilter(field_name='bank_name')
+    pay_purpose = filters.ChoiceFilter(field_name='pay_purpose')
+    amount = filters.NumberFilter(field_name='amount')
+
+    class Meta:
+        model = Payment
+        fields = ['user', 'bank_name', 'pay_purpose', 'amount']

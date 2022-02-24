@@ -69,3 +69,11 @@ class ChangePasswordView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = PasswordChangeSerializer
+
+
+class LogoutAPIView(views.APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        request.user.auth_token.delete()
+        return Response(prepare_success_response("Logout"), status=status.HTTP_200_OK)

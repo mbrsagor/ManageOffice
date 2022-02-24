@@ -44,3 +44,23 @@ class Types(IntEnum):
     @classmethod
     def employee_types(cls):
         return [(key.value, key.name) for key in cls]
+
+
+class Pay(IntEnum):
+    SALARY = 0
+    BONUS = 1
+    MEDICAL = 2
+    OTHERS = 3
+
+    @classmethod
+    def payment_types(cls):
+        return [(key.value, key.name) for key in cls]
+
+
+class Status(IntEnum):
+    REGULAR = 0
+    DUE = 1
+
+    @classmethod
+    def pay_status(cls):
+        return [(key.value, key.name) for key in cls]
