@@ -34,7 +34,7 @@ class BankFilter(filters.FilterSet):
 class PaymentFilter(filters.FilterSet):
     user = filters.ModelChoiceFilter(field_name='user', queryset=User.objects.all())
     bank_name = filters.ModelChoiceFilter(field_name='bank_name', queryset=Bank.objects.all())
-    pay_purpose = filters.ChoiceFilter(field_name='pay_purpose')
+    pay_purpose = filters.ChoiceFilter(field_name='pay_purpose', choices=Pay.payment_types())
     amount = filters.NumberFilter(field_name='amount')
 
     class Meta:

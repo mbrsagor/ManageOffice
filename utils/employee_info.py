@@ -60,8 +60,20 @@ class Pay(IntEnum):
 class Status(IntEnum):
     REGULAR = 0
     DUE = 1
-    OTHERS = 2
+    ADVANCE = 2
+    PAID = 2
 
     @classmethod
     def pay_status(cls):
+        return [(key.value, key.name) for key in cls]
+
+
+class Evolution(IntEnum):
+    PROGRESS = 0
+    PENDING = 1
+    DONE = 2
+    FAILED = 3
+
+    @classmethod
+    def task_status(cls):
         return [(key.value, key.name) for key in cls]
