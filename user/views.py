@@ -5,8 +5,19 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 from .models import Profile
-from .serializers import ProfileSerializer, UserSerializer
+from .serializers import ProfileSerializer, UserSerializer, RegistrationSerializer
 from utils.response import prepare_success_response, prepare_create_success_response, prepare_error_response
+
+
+class UserRegistrationAPIView(views.APIView):
+    permission_classes = [permissions.AllowAny, ]
+
+    def post(self, request):
+        serializer = RegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
+        return Response(prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginAPIView(ObtainAuthToken):
@@ -40,6 +51,7 @@ class ProfileAPIView(views.APIView):
 
 class ProfileUpdateAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
+
     # serializer_class = ProfileSerializer
 
     def put(self, request, pk):
