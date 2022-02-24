@@ -1,11 +1,11 @@
-from rest_framework import views, status, permissions
+from rest_framework import views, status, permissions, generics
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 from .models import Profile
-from .serializers import ProfileSerializer, UserSerializer, RegistrationSerializer
+from .serializers import ProfileSerializer, UserSerializer, RegistrationSerializer, PasswordChangeSerializer
 from utils.response import prepare_success_response, prepare_create_success_response, prepare_error_response
 
 
@@ -44,6 +44,7 @@ class ProfileAPIView(views.APIView):
             serializer = ProfileSerializer(queryset)
             return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
         except Exception as e:
+            print(e)
             queryset = User.objects.get(id=self.request.user.id)
             serializer = UserSerializer(queryset)
             return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
@@ -52,11 +53,8 @@ class ProfileAPIView(views.APIView):
 class ProfileUpdateAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
-    # serializer_class = ProfileSerializer
-
     def put(self, request, pk):
         profile = Profile.objects.get(id=pk)
-        print(f"Profile: {profile}")
         if profile is not None:
             serializer = ProfileSerializer(profile, data=request.data)
             if serializer.is_valid(raise_exception=True):
@@ -65,3 +63,9 @@ class ProfileUpdateAPIView(views.APIView):
             return Response(prepare_create_success_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(prepare_error_response('The user ID not found'), status=status.HTTP_403_FORBIDDEN)
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = PasswordChangeSerializer
