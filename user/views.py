@@ -1,10 +1,27 @@
 from rest_framework import views, status, permissions
 from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 from .models import Profile
 from .serializers import ProfileSerializer, UserSerializer
 from utils.response import prepare_success_response, prepare_create_success_response, prepare_error_response
+
+
+class LoginAPIView(ObtainAuthToken):
+    permission_classes = [permissions.AllowAny, ]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        token, created = Token.objects.get_or_create(user=serializer.validated_data['user'])
+        user = serializer.validated_data['user']
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'message': 'The user has been login successfully'
+        }, status=status.HTTP_200_OK)
 
 
 class ProfileAPIView(views.APIView):
@@ -23,11 +40,12 @@ class ProfileAPIView(views.APIView):
 
 class ProfileUpdateAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ProfileSerializer
+    # serializer_class = ProfileSerializer
 
     def put(self, request, pk):
         profile = Profile.objects.get(id=pk)
-        if profile:
+        print(f"Profile: {profile}")
+        if profile is not None:
             serializer = ProfileSerializer(profile, data=request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save(user=request.user)
