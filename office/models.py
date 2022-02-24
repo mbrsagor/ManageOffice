@@ -1,4 +1,4 @@
-from datetime import date
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -66,17 +66,23 @@ class Project(BaseEntity):
         return self.name
 
     @property
-    def day(self):
-        today = date.today()
-        return self.date_line - today
+    def start_day(self):
+        day = datetime.date.today() - self.date_line
+        return int(day.days / 365.25)
 
 
 class Task(BaseEntity):
     task_name = models.CharField(max_length=120)
     project_name = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project')
-    assigned_by = models.ManyToManyField(User, related_name='taskMember')
+    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='taskOwner', blank=True)
+    assigned_users = models.ManyToManyField(User, related_name='taskMember')
     assigned_date = models.DateField()
     status = models.IntegerField(choices=Evolution.task_status(), default=Evolution.PROGRESS.value)
 
     def __str__(self):
         return self.task_name[:50]
+
+    @property
+    def total_working_day(self):
+        day = Project.date_line - self.assigned_date
+        return day
