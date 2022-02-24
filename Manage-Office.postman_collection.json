@@ -1,0 +1,786 @@
+{
+	"info": {
+		"_postman_id": "afa3af48-b8ed-452b-869e-0faf3500fd31",
+		"name": "Manage-Office",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user-information",
+			"item": [
+				{
+					"name": "profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile-update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 21,\n    \"bank_account_number\": \"S-123\",\n    \"bank_branch_name\": \"Sundorgonj\",\n    \"employee_type\": 0,\n    \"role\": 0,\n    \"gender\": 1,\n    \"marital_status\": 0,\n    \"address\": \"Dhormopur, Sundorgonj, Gaibandha\",\n    \"phn_num\": \"01700000000\",\n    \"emergency_phn_num\": \"01700000000\",\n    \"reference_name\": \"Mbr Sagor\",\n    \"salary\": 35000,\n    \"date_of_birth\": \"2018-02-24\",\n    \"documents\": \"/documents/Certificate_ofAWS.png\",\n    \"profile_picture\": null,\n    \"user\": 3,\n    \"departments\": 4,\n    \"designations\": 14,\n    \"bank_name\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/profile/21/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"profile",
+								"21",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"dev\",\n    \"password\": \"dev@2022\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"limit\",\n    \"email\": \"limit@gmail.com\",\n    \"first_name\": \"Md\",\n    \"last_name\": \"Limit\",\n    \"password\": \"user_12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/registration/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"registration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token aec5245477e083edeb8a5b66e839d6d0afe2d608",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"old_password\" : \"user12345\",\n    \"new_password\" : \"dev@2022\",\n    \"confirm_password\" : \"dev@2022\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/password-change/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"password-change",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token aec5245477e083edeb8a5b66e839d6d0afe2d608",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/logout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "office",
+			"item": [
+				{
+					"name": "create-bank",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ABCD Bank\",\n    \"is_active\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/bank/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"bank",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bank-list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/bank/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"bank",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-department",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New Development\",\n    \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/department/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"department",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "department-list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/department/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"department",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "designation-list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/designation/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"designation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-designation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"CEO & Founder\",\n    \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/designation/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"designation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/payment/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"payment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Current month salary for purpose\",\n    \"user\": 1,\n    \"bank_name\": 19,\n    \"pay_purpose\": 0,\n    \"status\": 0,\n    \"amount\": 45000,\n    \"month\": \"2022-02-10\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/payment/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"payment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/payment-filter/?user=2&bank_name=19&pay_purpose=0&amount=45000",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"payment-filter",
+								""
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "2"
+								},
+								{
+									"key": "bank_name",
+									"value": "19"
+								},
+								{
+									"key": "pay_purpose",
+									"value": "0"
+								},
+								{
+									"key": "amount",
+									"value": "45000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project",
+			"item": [
+				{
+					"name": "project-list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/project/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"project",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project-details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/project/27/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"27",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Inventory Management System\",\n    \"description\": \"Distinctively leverage other's synergistic supply chains rather than market-driven portals. Appropriately leverage.\",\n    \"budget\": 393927,\n    \"client_name\": \"Mbr Sagor\",\n    \"client_phn_num\": \"017000000\",\n    \"client_email\": \"jon.deo@gmail.com\",\n    \"reference_name\": \"Mbr Sagor\",\n    \"date_line\": \"2022-03-20\",\n    \"payment_status\": 2,\n    \"is_active\": true,\n    \"status\": 0,\n    \"document\": null,\n    \"image\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/project/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"project",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project-update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 28,\n    \"name\": \"Inventory Management System\",\n    \"description\": \"Distinctively leverage other's synergistic supply chains rather than market-driven portals. Appropriately leverage.\",\n    \"budget\": 250000,\n    \"client_name\": \"Mbr Sagor\",\n    \"client_phn_num\": \"017000000\",\n    \"client_email\": \"jon.deo@gmail.com\",\n    \"reference_name\": \"Mbr Sagor\",\n    \"date_line\": \"2022-03-20\",\n    \"payment_status\": 2,\n    \"is_active\": true,\n    \"status\": 0,\n    \"document\": null,\n    \"image\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/project/28/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"28",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/project-filter/?client_name=Mbr+Sagor&client_phn_num=&date_line=&status=&budget_min=&budget_max=&is_active=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"project-filter",
+								""
+							],
+							"query": [
+								{
+									"key": "client_name",
+									"value": "Mbr+Sagor"
+								},
+								{
+									"key": "client_phn_num",
+									"value": ""
+								},
+								{
+									"key": "date_line",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": ""
+								},
+								{
+									"key": "budget_min",
+									"value": ""
+								},
+								{
+									"key": "budget_max",
+									"value": ""
+								},
+								{
+									"key": "is_active",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "task",
+			"item": [
+				{
+					"name": "task-list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/task/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"task",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
