@@ -6,6 +6,7 @@ from office.views.bank_view import BankViewSet
 from office.views.payment_view import PaymentViewSet, PaymentSearchFilterView
 from office.views.project_view import ProjectViewSet, ProjectFilterView
 from office.views.task_view import TaskViewSet
+from office.views.client_view import ClientViewSet
 
 router = routers.DefaultRouter()
 
@@ -15,6 +16,7 @@ router.register('bank', BankViewSet)
 router.register('payment', PaymentViewSet)
 router.register('project', ProjectViewSet)
 router.register('task', TaskViewSet)
+router.register('client', ClientViewSet)
 
 urlpatterns = [
     path('payment-filter/', PaymentSearchFilterView.as_view()),

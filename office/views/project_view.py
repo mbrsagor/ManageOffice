@@ -1,15 +1,14 @@
 from rest_framework import viewsets, generics, permissions
 from django_filters import rest_framework as filters
 
-from office.models import Project
+from office.models import Project, Client
 from office.serializers.project_serializer import ProjectSerializer
 from office.pagination import StandardResultsSetPagination
 from utils.employee_info import Evolution
 
 
 class ProjectFilter(filters.FilterSet):
-    client_name = filters.CharFilter(field_name='client_name')
-    client_phn_num = filters.CharFilter(field_name='client_phn_num')
+    client_name = filters.ModelChoiceFilter(field_name='client_name', queryset=Client.objects.all())
     date_line = filters.DateFilter(field_name='date_line')
     is_active = filters.BooleanFilter(field_name='is_active')
     budget = filters.NumericRangeFilter(field_name='budget')
@@ -17,7 +16,7 @@ class ProjectFilter(filters.FilterSet):
 
     class Meta:
         model = Project
-        fields = ['client_name', 'client_phn_num', 'date_line', 'status', 'budget']
+        fields = ['client_name', 'date_line', 'is_active', 'status', 'budget']
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

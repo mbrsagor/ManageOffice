@@ -47,13 +47,22 @@ class Payment(BaseEntity):
         return self.title[:50]
 
 
+class Client(BaseEntity):
+    name = models.CharField(max_length=30)
+    phn_num = models.CharField(max_length=14)
+    email = models.EmailField(blank=True)
+    address = models.TextField()
+    organization = models.CharField(max_length=120, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Project(BaseEntity):
     name = models.CharField(max_length=100)
     description = models.TextField()
     budget = models.IntegerField()
-    client_name = models.CharField(max_length=30)
-    client_phn_num = models.CharField(max_length=14)
-    client_email = models.EmailField(blank=True)
+    client_name = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='clientRefer', blank=True)
     reference_name = models.CharField(max_length=30, blank=True, null=True)
     date_line = models.DateField()
     payment_status = models.IntegerField(choices=Status.pay_status(), default=Status.ADVANCE.value)
