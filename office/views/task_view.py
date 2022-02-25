@@ -17,7 +17,7 @@ class TaskFilter(filters.FilterSet):
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
     pagination_class = StandardResultsSetPagination
 
 

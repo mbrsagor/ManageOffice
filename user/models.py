@@ -28,17 +28,17 @@ class Profile(BaseEntity):
     salary = models.IntegerField(default=0)
     date_of_birth = models.DateField(blank=True, null=True, default=now)
     documents = models.FileField(upload_to='documents', blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile', blank=True, null=True)
+    avatar = models.ImageField(upload_to='profile', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
 
     @property
     def get_photo_url(self):
-        if self.profile_picture and hasattr(self.profile_picture, 'url'):
-            return self.profile_picture.url
+        if self.avatar and hasattr(self.avatar, 'url'):
+            return self.avatar.url
         else:
-            return "/static/images/avatar.jpg"
+            return "/static/images/avatar.svg"
 
     def calculate_age(self):
         age = datetime.date.today() - self.date_of_birth
