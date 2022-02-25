@@ -546,7 +546,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
 								"type": "text"
 							}
 						],
@@ -775,6 +775,205 @@
 								"v1",
 								"task",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "task-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/task-filter/?project_name=5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"task-filter",
+								""
+							],
+							"query": [
+								{
+									"key": "project_name",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "client",
+			"item": [
+				{
+					"name": "client-list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/client/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-new-client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Faysal Ahmed\",\n    \"phn_num\": \"01773747410\",\n    \"email\": \"fausal.cse@gmail.com\",\n    \"address\": \"Gazipur branch\",\n    \"organization\": \"Software SSL Ltd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/client/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "client-update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3,\n    \"name\": \"Faysal Ahmed\",\n    \"phn_num\": \"01773747410\",\n    \"email\": \"fausal.cse@gmail.com\",\n    \"address\": \"Gazipur branch\",\n    \"organization\": \"Software SL Ltd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/client/3/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "client-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/client-filter/?name=Bozlur Rosid Sagor&phn_num=01773474709&email=brshagor.cse@gmail.com",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"client-filter",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Bozlur Rosid Sagor"
+								},
+								{
+									"key": "phn_num",
+									"value": "01773474709"
+								},
+								{
+									"key": "email",
+									"value": "brshagor.cse@gmail.com"
+								}
 							]
 						}
 					},

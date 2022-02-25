@@ -4,8 +4,11 @@
 
 Please follow the instructions to run the application your systems.
 #### Setup:
+
+The following steps will walk you thru installation on a Mac. I think linux should be similar. It's also possible to develop on a Windows machine, but I have not documented the steps. If you've developed django apps on Windows, you should have little problem getting up and running.
+
 ```bash
-git clone https://github.com/mbrsagor/MnageOffice.git
+git clone https://github.com/mbrsagor/manageOffice.git
 cd MnageOffice
 ```
 Then create .env file and paste code from `example.env` file and add validate information.
@@ -20,8 +23,6 @@ Then create .env file and paste code from `example.env` file and add validate in
 virtualenv venv --python=python3.8
 source venv/bin/activate
 pip install -r requirements.txt
-./manage.py makemigrations accounts
-./manage.py migrate accounts
 ./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py runserver
