@@ -44,3 +44,6 @@ pip install psycopg2-binary
 CREATE DATABASE db_name;
 \q
 ```
+
+##### If you want to run the project ``Docker`` container please follow the `DockerDeployment.md` docs
+## Happy coding :wink:

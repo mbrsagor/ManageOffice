@@ -756,7 +756,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
 								"type": "text"
 							}
 						],
@@ -812,6 +812,118 @@
 									"key": "project_name",
 									"value": "5"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "complete-task",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/complete-task/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"complete-task",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-new-task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task_name\": \"Bug fix with refactor\",\n    \"project_name\": 4,\n    \"assigned_by\": 1,\n    \"assigned_users\": [\n        1,\n        2\n    ],\n    \"assigned_date\": \"2022-03-15\",\n    \"status\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/task/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"task",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task_name\": \"Bug fix with refactor\",\n    \"project_name\": 4,\n    \"assigned_by\": 1,\n    \"assigned_users\": [\n        1,\n        2\n    ],\n    \"assigned_date\": \"2022-03-17\",\n    \"status\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/task/8/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"task",
+								"8",
+								""
 							]
 						}
 					},

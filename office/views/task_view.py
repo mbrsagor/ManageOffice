@@ -39,7 +39,7 @@ class CompleteTaskListAPIView(views.APIView):
     def get(self, request):
         try:
             complete_task = Task.objects.filter(status=Evolution.DONE)
-            serializer = TaskSerializer(complete_task, data=request.data)
+            serializer = TaskSerializer(complete_task, many=True)
             return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
