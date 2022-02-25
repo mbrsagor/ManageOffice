@@ -5,7 +5,7 @@ from office.views.designation_view import DesignationViewSet
 from office.views.bank_view import BankViewSet
 from office.views.payment_view import PaymentViewSet, PaymentSearchFilterView
 from office.views.project_view import ProjectViewSet, ProjectFilterView
-from office.views.task_view import TaskViewSet, TaskFilterView
+from office.views.task_view import TaskViewSet, TaskFilterView, CompleteTaskListAPIView
 from office.views.client_view import ClientViewSet, ClientFilterView
 
 router = routers.DefaultRouter()
@@ -23,4 +23,5 @@ urlpatterns = [
     path('project-filter/', ProjectFilterView.as_view()),
     path('task-filter/', TaskFilterView.as_view()),
     path('client-filter/', ClientFilterView.as_view()),
+    path('complete-task/', CompleteTaskListAPIView.as_view()),
 ] + router.urls

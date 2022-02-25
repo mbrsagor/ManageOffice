@@ -5,6 +5,10 @@
 Please follow the instructions to run the application your systems.
 #### Setup:
 
+###### Dependencies:-
+- Python 3.8
+- Postgresql 14.1
+
 The following steps will walk you thru installation on a Mac. I think linux should be similar. It's also possible to develop on a Windows machine, but I have not documented the steps. If you've developed django apps on Windows, you should have little problem getting up and running.
 
 ```bash
@@ -31,4 +35,12 @@ pip install -r requirements.txt
 #### Install postgresql
 ```bash
 pip install psycopg2-binary
+```
+
+##### Create Postgresql database: Example
+>1st open your terminal and follow the commands.
+- ```psql postgres```
+```bash
+CREATE DATABASE db_name;
+\q
 ```

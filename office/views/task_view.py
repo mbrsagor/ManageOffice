@@ -1,9 +1,12 @@
-from rest_framework import viewsets, generics, permissions
+from rest_framework import viewsets, views, generics, permissions, status
 from django_filters import rest_framework as filters
+from rest_framework.response import Response
 
 from office.models import Task, Project
 from office.serializers.task_serializer import TaskSerializer
 from office.pagination import StandardResultsSetPagination
+from utils.employee_info import Evolution
+from utils.response import prepare_success_response, prepare_error_response
 
 
 class TaskFilter(filters.FilterSet):
@@ -28,3 +31,18 @@ class TaskFilterView(generics.ListAPIView):
     pagination_class = StandardResultsSetPagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = TaskFilter
+
+
+class CompleteTaskListAPIView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        try:
+            complete_task = Task.objects.filter(status=Evolution.DONE)
+            serializer = TaskSerializer(complete_task, data=request.data)
+            return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                prepare_error_response(e),
+                status=status.HTTP_400_BAD_REQUEST
+            )
