@@ -41,7 +41,7 @@ class Bank(BaseEntity):
 class Payment(BaseEntity):
     title = models.CharField(max_length=120)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='paymentEmployee')
-    bank_name = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='paymentBank')
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='paymentBank')
     pay_purpose = models.IntegerField(choices=Pay.payment_types(), default=Pay.SALARY.value)
     status = models.IntegerField(choices=Status.pay_status(), default=Status.REGULAR.value)
     amount = models.IntegerField(default=0)
@@ -66,7 +66,7 @@ class Project(BaseEntity):
     name = models.CharField(max_length=100)
     description = models.TextField()
     budget = models.IntegerField()
-    client_name = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='clientRefer', blank=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='clientRefer', blank=True)
     reference_name = models.CharField(max_length=30, blank=True, null=True)
     date_line = models.DateField()
     payment_status = models.IntegerField(choices=Status.pay_status(), default=Status.ADVANCE.value)
@@ -86,9 +86,9 @@ class Project(BaseEntity):
 
 class Task(BaseEntity):
     task_name = models.CharField(max_length=120)
-    project_name = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project')
     assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='taskOwner', blank=True)
-    assigned_users = models.ManyToManyField(User, related_name='taskMember')
+    users = models.ManyToManyField(User, related_name='taskMember')
     assigned_date = models.DateField()
     status = models.IntegerField(choices=Evolution.task_status(), default=Evolution.PROGRESS.value)
 

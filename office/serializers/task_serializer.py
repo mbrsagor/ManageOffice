@@ -6,12 +6,13 @@ from office.models import Task
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
+        read_only_fields = ('assigned_by',)
         fields = [
             'id',
             'task_name',
-            'project_name',
+            'project',
             'assigned_by',
-            'assigned_users',
+            'users',
             'assigned_date',
             'status',
             # 'total_working_day',

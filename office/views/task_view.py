@@ -14,7 +14,7 @@ class TaskFilter(filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['project_name']
+        fields = ['project']
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -22,6 +22,12 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAdminUser]
     pagination_class = StandardResultsSetPagination
+
+    def perform_create(self, serializer):
+        return serializer.save(assigned_by=self.request.user)
+
+    def perform_update(self, serializer):
+        return serializer.save(assigned_by=self.request.user)
 
 
 class TaskFilterView(generics.ListAPIView):

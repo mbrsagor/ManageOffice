@@ -12,7 +12,7 @@ class PaymentSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'user',
-            'bank_name',
+            'bank',
             'pay_purpose',
             'status',
             'amount',
@@ -24,9 +24,8 @@ class PaymentSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['user'] = UserSerializer(instance.user).data
-        response['bank_name'] = BankSerializer(instance.bank_name).data
+        response['bank'] = BankSerializer(instance.bank_name).data
         return response
-
 
     # def validate_month(self, value):
     #     if len(value) <= 10:
