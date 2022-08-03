@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env(
     DEBUG=(bool, False),
-    ALLOWED_HOSTS=(list),
+    ALLOWED_HOSTS=list,
 )
 
 env_path = os.path.join(BASE_DIR, '.env')
@@ -167,7 +167,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
-    'DATETIME_FORMAT': '%Y-%m-%d %I:%M %p ',
+    'DATETIME_FORMAT': '%Y-%m-%d %I:%M %p',
 }
 
 CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request

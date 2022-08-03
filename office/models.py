@@ -9,6 +9,10 @@ class BaseEntity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-created_at']
+        abstract = True
+
 
 class Department(BaseEntity):
     name = models.CharField(max_length=50, unique=True)
