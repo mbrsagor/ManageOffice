@@ -13,26 +13,32 @@ class UserRegistrationAPIView(views.APIView):
     permission_classes = [permissions.AllowAny, ]
 
     def post(self, request):
-        serializer = RegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
-        return Response(prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+        try:
+            serializer = RegistrationSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
+            return Response(prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+        except Exception as ex:
+            return Response(prepare_error_response(str(ex)), status=status.HTTP_403_FORBIDDEN)
 
 
 class LoginAPIView(ObtainAuthToken):
     permission_classes = [permissions.AllowAny, ]
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        token, created = Token.objects.get_or_create(user=serializer.validated_data['user'])
-        user = serializer.validated_data['user']
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'message': 'The user has been login successfully'
-        }, status=status.HTTP_200_OK)
+        try:
+            serializer = self.serializer_class(data=request.data, context={'request': request})
+            serializer.is_valid(raise_exception=True)
+            token, created = Token.objects.get_or_create(user=serializer.validated_data['user'])
+            user = serializer.validated_data['user']
+            return Response({
+                'token': token.key,
+                'user_id': user.pk,
+                'message': 'The user has been login successfully'
+            }, status=status.HTTP_200_OK)
+        except Exception as ex:
+            return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProfileAPIView(views.APIView):
@@ -54,15 +60,18 @@ class ProfileUpdateAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def put(self, request, pk):
-        profile = Profile.objects.get(id=pk)
-        if profile is not None:
-            serializer = ProfileSerializer(profile, data=request.data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save(user=request.user)
-                return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
-            return Response(prepare_create_success_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(prepare_error_response('The user ID not found'), status=status.HTTP_403_FORBIDDEN)
+        try:
+            profile = Profile.objects.get(id=pk)
+            if profile is not None:
+                serializer = ProfileSerializer(profile, data=request.data)
+                if serializer.is_valid(raise_exception=True):
+                    serializer.save(user=request.user)
+                    return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
+                return Response(prepare_create_success_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(prepare_error_response('The user ID not found'), status=status.HTTP_403_FORBIDDEN)
+        except Exception as ex:
+            return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
 
 
 class ChangePasswordView(generics.UpdateAPIView):

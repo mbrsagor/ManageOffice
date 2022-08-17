@@ -1,20 +1,18 @@
 import datetime
-from django.utils.timezone import now
 from django.db import models
+from django.utils.timezone import now
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
-from utils.employee_info import Types, Roles, GENDER, MARITAL
 from office.models import Bank, Department, BaseEntity
+from utils.employee_info import Types, Roles, GENDER, MARITAL
 
 
 class Profile(BaseEntity):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee')
-    departments = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='department', blank=True,
-                                    null=True)
-    designations = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='designation', blank=True,
-                                     null=True)
-    bank_name = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='employeeBank', blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    departments = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
+    designations = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
+    bank_name = models.ForeignKey(Bank, on_delete=models.CASCADE, blank=True, null=True)
     bank_account_number = models.CharField(max_length=20, blank=True, null=True)
     bank_branch_name = models.CharField(max_length=20, blank=True, null=True)
     employee_type = models.IntegerField(choices=Types.employee_types(), default=Types.FULLTIME.value)
