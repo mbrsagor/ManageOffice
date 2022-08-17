@@ -15,37 +15,37 @@ class BaseEntity(models.Model):
 
 
 class Department(BaseEntity):
-    name = models.CharField(max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Designation(BaseEntity):
-    name = models.CharField(max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Bank(BaseEntity):
-    name = models.CharField(max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Payment(BaseEntity):
+    month = models.DateField()
+    amount = models.IntegerField(default=0)
     title = models.CharField(max_length=120)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='paymentEmployee')
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='paymentBank')
     pay_purpose = models.IntegerField(choices=Pay.payment_types(), default=Pay.SALARY.value)
     status = models.IntegerField(choices=Status.pay_status(), default=Status.REGULAR.value)
-    amount = models.IntegerField(default=0)
-    month = models.DateField()
 
     def __str__(self):
         return self.title[:50]
@@ -66,14 +66,14 @@ class Project(BaseEntity):
     name = models.CharField(max_length=100)
     description = models.TextField()
     budget = models.IntegerField()
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='clientRefer', blank=True)
-    reference_name = models.CharField(max_length=30, blank=True, null=True)
     date_line = models.DateField()
-    payment_status = models.IntegerField(choices=Status.pay_status(), default=Status.ADVANCE.value)
     is_active = models.BooleanField(default=True)
-    status = models.IntegerField(choices=Evolution.task_status(), default=Evolution.PROGRESS.value)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True)
+    reference_name = models.CharField(max_length=30, blank=True, null=True)
     document = models.FileField(upload_to='project', blank=True, null=True)
     image = models.ImageField(upload_to='project', blank=True, null=True)
+    payment_status = models.IntegerField(choices=Status.pay_status(), default=Status.ADVANCE.value)
+    status = models.IntegerField(choices=Evolution.task_status(), default=Evolution.PROGRESS.value)
 
     def __str__(self):
         return self.name
@@ -85,11 +85,11 @@ class Project(BaseEntity):
 
 
 class Task(BaseEntity):
+    assigned_date = models.DateField()
     task_name = models.CharField(max_length=120)
+    users = models.ManyToManyField(User, related_name='taskMember')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project')
     assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='taskOwner', blank=True)
-    users = models.ManyToManyField(User, related_name='taskMember')
-    assigned_date = models.DateField()
     status = models.IntegerField(choices=Evolution.task_status(), default=Evolution.PROGRESS.value)
 
     def __str__(self):

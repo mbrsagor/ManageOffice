@@ -15,7 +15,6 @@ class TaskSerializer(serializers.ModelSerializer):
             'users',
             'assigned_date',
             'status',
-            # 'total_working_day',
             'created_at',
             'updated_at'
         ]

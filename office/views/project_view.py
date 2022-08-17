@@ -8,11 +8,11 @@ from utils.employee_info import Evolution
 
 
 class ProjectFilter(filters.FilterSet):
-    client_name = filters.ModelChoiceFilter(field_name='client_name', queryset=Client.objects.all())
     date_line = filters.DateFilter(field_name='date_line')
     is_active = filters.BooleanFilter(field_name='is_active')
     budget = filters.NumericRangeFilter(field_name='budget')
     status = filters.ChoiceFilter(field_name='pay_purpose', choices=Evolution.task_status())
+    client_name = filters.ModelChoiceFilter(field_name='client_name', queryset=Client.objects.all())
 
     class Meta:
         model = Project
