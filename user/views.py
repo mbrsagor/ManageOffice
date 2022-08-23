@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 from .models import Profile
+from utils.message import LOGIN_MSG, LOGOUT_MSG, NO_ID
 from .serializers import ProfileSerializer, UserSerializer, RegistrationSerializer, PasswordChangeSerializer
 from utils.response import prepare_success_response, prepare_create_success_response, prepare_error_response
 
@@ -35,7 +36,7 @@ class LoginAPIView(ObtainAuthToken):
             return Response({
                 'token': token.key,
                 'user_id': user.pk,
-                'message': 'The user has been login successfully'
+                'message': LOGIN_MSG
             }, status=status.HTTP_200_OK)
         except Exception as ex:
             return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
@@ -69,7 +70,7 @@ class ProfileUpdateAPIView(views.APIView):
                     return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
                 return Response(prepare_create_success_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
             else:
-                return Response(prepare_error_response('The user ID not found'), status=status.HTTP_403_FORBIDDEN)
+                return Response(prepare_error_response(NO_ID), status=status.HTTP_403_FORBIDDEN)
         except Exception as ex:
             return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
 
@@ -96,6 +97,6 @@ class LogoutAPIView(views.APIView):
     def get(self, request):
         try:
             request.user.auth_token.delete()
-            return Response(prepare_success_response("Logout"), status=status.HTTP_200_OK)
+            return Response(prepare_success_response(LOGOUT_MSG), status=status.HTTP_200_OK)
         except Exception as ex:
             return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
