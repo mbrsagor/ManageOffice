@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "afa3af48-b8ed-452b-869e-0faf3500fd31",
 		"name": "Manage-Office",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4348536"
 	},
 	"item": [
 		{
@@ -615,7 +616,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Inventory Management System\",\n    \"description\": \"Distinctively leverage other's synergistic supply chains rather than market-driven portals. Appropriately leverage.\",\n    \"budget\": 393927,\n    \"client_name\": \"Mbr Sagor\",\n    \"client_phn_num\": \"017000000\",\n    \"client_email\": \"jon.deo@gmail.com\",\n    \"reference_name\": \"Mbr Sagor\",\n    \"date_line\": \"2022-03-20\",\n    \"payment_status\": 2,\n    \"is_active\": true,\n    \"status\": 0,\n    \"document\": null,\n    \"image\": null\n}",
+							"raw": "{\n    \"name\": \"Inventory Management System\",\n    \"description\": \"Distinctively leverage other's synergistic supply chains rather than market-driven portals. Appropriately leverage.\",\n    \"budget\": 393927,\n    \"client\": \"Mbr Sagor\",\n    \"reference_name\": \"Mbr Sagor\",\n    \"date_line\": \"2022-03-20\",\n    \"payment_status\": 2,\n    \"is_active\": true,\n    \"status\": 0,\n    \"document\": null,\n    \"image\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -861,7 +862,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task_name\": \"Bug fix with refactor\",\n    \"project_name\": 4,\n    \"assigned_by\": 1,\n    \"assigned_users\": [\n        1,\n        2\n    ],\n    \"assigned_date\": \"2022-03-15\",\n    \"status\": 2\n}",
+							"raw": "{\n    \"task_name\": \"Bug fix with refactor\",\n    \"project\": 4,\n    \"assigned_by\": 1,\n    \"users\": [\n        1,\n        2\n    ],\n    \"assigned_date\": \"2022-03-15\",\n    \"status\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"

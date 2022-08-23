@@ -18,7 +18,7 @@ cd MnageOffice
 Then create .env file and paste code from `example.env` file and add validate information.
 
 ```bash
-|--> example.env
+|--> .example.env
 |--> .env
 ```
 
