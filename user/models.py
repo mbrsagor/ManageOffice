@@ -25,8 +25,8 @@ class Profile(BaseEntity):
     reference_name = models.CharField(max_length=20, blank=True, null=True)
     salary = models.IntegerField(default=0)
     date_of_birth = models.DateField(blank=True, null=True, default=now)
-    documents = models.FileField(upload_to='documents', blank=True, null=True)
-    avatar = models.ImageField(upload_to='profile', blank=True, null=True)
+    documents = models.FileField(upload_to='documents/%y/%m', blank=True, null=True)
+    avatar = models.ImageField(upload_to='profile/%y/%m', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

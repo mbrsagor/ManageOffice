@@ -42,8 +42,8 @@ class Payment(BaseEntity):
     month = models.DateField()
     amount = models.IntegerField(default=0)
     title = models.CharField(max_length=120)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='paymentEmployee')
-    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='paymentBank')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
     pay_purpose = models.IntegerField(choices=Pay.payment_types(), default=Pay.SALARY.value)
     status = models.IntegerField(choices=Status.pay_status(), default=Status.REGULAR.value)
 
@@ -70,8 +70,8 @@ class Project(BaseEntity):
     is_active = models.BooleanField(default=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True)
     reference_name = models.CharField(max_length=30, blank=True, null=True)
-    document = models.FileField(upload_to='project', blank=True, null=True)
-    image = models.ImageField(upload_to='project', blank=True, null=True)
+    document = models.FileField(upload_to='project/%y/%m', blank=True, null=True)
+    image = models.ImageField(upload_to='project/%y/%m', blank=True, null=True)
     payment_status = models.IntegerField(choices=Status.pay_status(), default=Status.ADVANCE.value)
     status = models.IntegerField(choices=Evolution.task_status(), default=Evolution.PROGRESS.value)
 
