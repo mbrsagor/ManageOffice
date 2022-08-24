@@ -9,7 +9,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     env_file: ./.env.docker
     networks:
-      - servernet
+      - office
 
   server:
     container_name: ManageOffice
@@ -27,7 +27,7 @@ services:
     links:
       - db:db
     networks:
-      - servernet
+      - office
 
 volumes:
   media_data:
@@ -35,5 +35,5 @@ volumes:
   postgres_data:
 
 networks:
-  servernet:
+  office:
     driver: bridge

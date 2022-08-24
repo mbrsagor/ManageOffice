@@ -76,7 +76,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"dev\",\n    \"password\": \"dev@2022\"\n}",
+							"raw": "{\n    \"username\": \"sagor\",\n    \"password\": \"dev@2022\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -221,7 +221,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
@@ -261,7 +261,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
@@ -289,7 +289,13 @@
 					"name": "create-department",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"name\": \"New Development\",\n    \"is_active\": true\n}",
@@ -385,7 +391,13 @@
 					"name": "create-designation",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"name\": \"CEO & Founder\",\n    \"is_active\": true\n}",
@@ -453,13 +465,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Current month salary for purpose\",\n    \"user\": 1,\n    \"bank_name\": 19,\n    \"pay_purpose\": 0,\n    \"status\": 0,\n    \"amount\": 45000,\n    \"month\": \"2022-02-10\"\n}\n",
+							"raw": "{\n    \"title\": \"Current month salary for purpose\",\n    \"user\": 1,\n    \"bank\": 1,\n    \"pay_purpose\": 0,\n    \"status\": 0,\n    \"amount\": 45000,\n    \"month\": \"2022-08-10\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -610,13 +622,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 4d1735e4c15fea00f2cb432c0cd12cda2d4a27f1",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Inventory Management System\",\n    \"description\": \"Distinctively leverage other's synergistic supply chains rather than market-driven portals. Appropriately leverage.\",\n    \"budget\": 393927,\n    \"client\": \"Mbr Sagor\",\n    \"reference_name\": \"Mbr Sagor\",\n    \"date_line\": \"2022-03-20\",\n    \"payment_status\": 2,\n    \"is_active\": true,\n    \"status\": 0,\n    \"document\": null,\n    \"image\": null\n}",
+							"raw": "{\n    \"name\": \"Inventory Management System\",\n    \"description\": \"Distinctively leverage other's synergistic supply chains rather than market-driven portals. Appropriately leverage.\",\n    \"budget\": 393927,\n    \"client\": 1,\n    \"reference_name\": \"Mbr Sagor\",\n    \"date_line\": \"2022-03-20\",\n    \"payment_status\": 2,\n    \"is_active\": true,\n    \"status\": 0,\n    \"document\": null,\n    \"image\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -757,7 +769,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
@@ -776,6 +788,13 @@
 								"v1",
 								"task",
 								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -856,13 +875,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task_name\": \"Bug fix with refactor\",\n    \"project\": 4,\n    \"assigned_by\": 1,\n    \"users\": [\n        1,\n        2\n    ],\n    \"assigned_date\": \"2022-03-15\",\n    \"status\": 2\n}",
+							"raw": "{\n    \"task_name\": \"Bug fix with refactor\",\n    \"project\": 1,\n    \"assigned_by\": 1,\n    \"users\": [\n        1\n    ],\n    \"assigned_date\": \"2022-08-15\",\n    \"status\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -973,7 +992,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token 8e8357a46cb361ad0f3c59b72c37927149f0d276",
+								"value": "token c79bda68288b424e745da47f3836302d2fe8d013",
 								"type": "text"
 							}
 						],
