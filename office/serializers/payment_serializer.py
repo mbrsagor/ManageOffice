@@ -24,7 +24,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         response = super().to_representation(instance)
         response['user'] = UserSerializer(instance.user).data
-        response['bank'] = BankSerializer(instance.bank_name).data
+        response['bank'] = BankSerializer(instance.bank).data
         return response
 
     # def validate_month(self, value):
