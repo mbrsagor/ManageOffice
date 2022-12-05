@@ -8,6 +8,9 @@ from office.filter import DepartmentFilter
 
 
 class DepartmentViewSet(viewsets.ModelViewSet):
+    """
+    Department CRUD API endpoint
+    """
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
     permission_classes = [permissions.IsAdminUser]

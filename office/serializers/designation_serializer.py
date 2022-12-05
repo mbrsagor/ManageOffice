@@ -14,6 +14,9 @@ class DesignationSerializer(serializers.ModelSerializer):
         ]
 
     def validate_name(self, value):
+        """
+        Validation Designation name
+        """
         if len(value) < 2:
             raise serializers.ValidationError("Name should be more than 1 characters")
         return value

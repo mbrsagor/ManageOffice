@@ -8,6 +8,9 @@ from utils.employee_info import Evolution
 
 
 class ProjectFilter(filters.FilterSet):
+    """
+    Filter project
+    """
     date_line = filters.DateFilter(field_name='date_line')
     is_active = filters.BooleanFilter(field_name='is_active')
     budget = filters.NumericRangeFilter(field_name='budget')
@@ -20,6 +23,9 @@ class ProjectFilter(filters.FilterSet):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    """
+    Create filter API
+    """
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAdminUser]
@@ -27,6 +33,9 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
 
 class ProjectFilterView(generics.ListAPIView):
+    """
+    Project filter API
+    """
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]

@@ -7,6 +7,10 @@ from office.pagination import StandardResultsSetPagination
 
 
 class ClientFilter(filters.FilterSet):
+    """
+    Client filter class
+    """
+
     name = filters.CharFilter(field_name='name')
     phn_num = filters.CharFilter(field_name='phn_num')
     email = filters.CharFilter(field_name='email')
@@ -17,6 +21,9 @@ class ClientFilter(filters.FilterSet):
 
 
 class ClientViewSet(viewsets.ModelViewSet):
+    """
+    Create user. The client only can create by superuser
+    """
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     permission_classes = [permissions.IsAdminUser]
@@ -24,6 +31,9 @@ class ClientViewSet(viewsets.ModelViewSet):
 
 
 class ClientFilterView(generics.ListAPIView):
+    """
+    List of client by search filter
+    """
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     pagination_class = StandardResultsSetPagination

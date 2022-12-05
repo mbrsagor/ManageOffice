@@ -18,6 +18,9 @@ class TaskFilter(filters.FilterSet):
 
 
 class TaskViewSet(viewsets.ModelViewSet):
+    """
+    Create Task API CRUD API
+    """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAdminUser]
@@ -31,6 +34,9 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 
 class TaskFilterView(generics.ListAPIView):
+    """
+    Task list API endpoint
+    """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -40,6 +46,9 @@ class TaskFilterView(generics.ListAPIView):
 
 
 class CompleteTaskListAPIView(views.APIView):
+    """
+    Complete task API listview
+    """
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):

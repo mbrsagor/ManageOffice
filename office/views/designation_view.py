@@ -8,6 +8,9 @@ from office.filter import DesignationFilter
 
 
 class DesignationViewSet(viewsets.ModelViewSet):
+    """
+    Designation CRUD API endpoint
+    """
     queryset = Designation.objects.all()
     serializer_class = DesignationSerializer
     permission_classes = [permissions.IsAdminUser]

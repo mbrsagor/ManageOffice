@@ -8,6 +8,9 @@ from office.filter import PaymentFilter
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
+    """
+    Payment CRUD API endpoint
+    """
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = [permissions.IsAdminUser]
@@ -15,6 +18,9 @@ class PaymentViewSet(viewsets.ModelViewSet):
 
 
 class PaymentSearchFilterView(generics.ListAPIView):
+    """
+    Payment filter API endpoint
+    """
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = [permissions.IsAdminUser]
