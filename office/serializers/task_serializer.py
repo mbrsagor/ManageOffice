@@ -19,3 +19,8 @@ class TaskSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         ]
+
+    def validate_task_name(self, value):
+        if len(value) < 3:
+            raise serializers.ValidationError("Task name should be more than 1 characters")
+        return value
