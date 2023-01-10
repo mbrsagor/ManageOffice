@@ -169,7 +169,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
-    'DATETIME_FORMAT': '%Y-%m-%d %I:%M %p',
+    'DATETIME_FORMAT': '%d %b, %Y, %I:%M %p'
 }
 
 CORS_ALLOW_CREDENTIALS = True  # to accept cookies via ajax request
