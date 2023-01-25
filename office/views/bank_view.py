@@ -44,3 +44,29 @@ class BankViewSet(viewsets.ModelViewSet):
 #                 return Response(response.prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
 #         else:
 #             return Response(response.prepare_error_response(messages.PERMISSION_MSG))
+
+
+"""
+class RemoveMemberAPIView(views.APIView):
+
+    def delete(self, reqeust, pk):
+        try:
+            access = self.request.user.role
+            action = reqeust.data.get('action')  # Action get from reqeust
+            if access == enum_utils.allow_access_consumer or access == self.request.user.is_superuser:
+                member = Member.objects.get(id=pk)
+                if member is not None:
+                    if action == 1:
+                        member.delete()
+                        return Response(response.prepare_success_response(messages.REMOVE_MERCHANT),
+                                        status=status.HTTP_200_OK)
+                    if action == 2:
+                        member.delete()
+                        return Response(response.prepare_success_response(messages.REQUEST_CANCEL_MERCHANT),
+                                        status=status.HTTP_200_OK)
+                return Response(response.prepare_error_response(messages.NO_CONTENT_FOUND), status=status.HTTP_200_OK)
+            else:
+                return Response(response.prepare_error_response(messages.PERMISSION_MSG), status=status.HTTP_200_OK)
+        except Member.DoesNotExist:
+            return Response(response.prepare_error_response(messages.ERROR_COMMON))
+"""
