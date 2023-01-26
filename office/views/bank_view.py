@@ -70,3 +70,40 @@ class RemoveMemberAPIView(views.APIView):
         except Member.DoesNotExist:
             return Response(response.prepare_error_response(messages.ERROR_COMMON))
 """
+
+# Details API design
+"""
+class OfferDetailsAPI(views.APIView):
+    def get(self, request, pk):
+        try:
+            offer = Offer.objects.get(id=pk)
+            if offer is not None:
+                serializer = offer_serializer.OfferSerializer(offer).data
+                data = {
+                    'id': serializer.get('id'),
+                    'name': serializer.get('name'),
+                    'is_publish': serializer.get('is_publish'),
+                    'merchant': serializer.get('merchant'),
+                    'merchant_name': serializer.get('merchant_name'),
+                    'offer_url': serializer.get('offer_url'),
+                    'category': serializer.get('category'),
+                    'category_name': serializer.get('category_name'),
+                    'start_time': serializer.get('start_time'),
+                    'end_time': serializer.get('end_time'),
+                    'image': mixin.base_url() + serializer.get('image') if serializer.get('image') else "",
+                    'posted_at': serializer.get('posted_at'),
+                    'created_at': serializer.get('created_at'),
+                    'tags': serializer.get('tags'),
+                    'description': serializer.get('description')
+                }
+                res = {
+                    'status': True,
+                    'messages': messages.DATA_RETURN,
+                    'offers': data
+                }
+                return Response(res, status=status.HTTP_200_OK)
+            return Response(response.prepare_error_response(messages.NO_CONTENT_FOUND),
+                            status=status.HTTP_404_NOT_FOUND)
+        except Exception as ex:
+            return Response(response.prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
+"""
