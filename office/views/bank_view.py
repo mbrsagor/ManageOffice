@@ -4,7 +4,7 @@ from rest_framework import viewsets, permissions, views
 
 from office.models import Bank
 from office.serializers.bank_serailizer import BankSerializer
-from office.pagination import StandardResultsSetPagination
+from pagination.default_pagination import StandardResultsSetPagination
 from office.filter import BankFilter
 
 

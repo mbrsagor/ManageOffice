@@ -3,7 +3,7 @@ from django_filters import rest_framework as filters
 
 from office.models import Designation
 from office.serializers.designation_serializer import DesignationSerializer
-from office.pagination import StandardResultsSetPagination
+from pagination.default_pagination import StandardResultsSetPagination
 from office.filter import DesignationFilter
 
 

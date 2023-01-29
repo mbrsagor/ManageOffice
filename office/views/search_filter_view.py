@@ -1,6 +1,8 @@
 from rest_framework import views, status
 from rest_framework.response import Response
 
+from utils.response import prepare_success_response
+
 
 class CrewOrderSearchByCalender(views.APIView):
     """
@@ -25,4 +27,4 @@ class CrewOrderSearchByCalender(views.APIView):
                 'duration': obj['duration'],
             }
             issues.append(data)
-        return Response(response.prepare_success_response(issues), status=status.HTTP_200_OK)
+        return Response(prepare_success_response(issues), status=status.HTTP_200_OK)

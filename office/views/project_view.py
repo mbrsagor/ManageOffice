@@ -3,7 +3,7 @@ from django_filters import rest_framework as filters
 
 from office.models import Project, Client
 from office.serializers.project_serializer import ProjectSerializer
-from office.pagination import StandardResultsSetPagination
+from pagination.default_pagination import StandardResultsSetPagination
 from utils.employee_info import Evolution
 
 

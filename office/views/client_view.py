@@ -3,7 +3,7 @@ from django_filters import rest_framework as filters
 
 from office.models import Client
 from office.serializers.client_serializer import ClientSerializer
-from office.pagination import StandardResultsSetPagination
+from pagination.default_pagination import StandardResultsSetPagination
 
 
 class ClientFilter(filters.FilterSet):

@@ -3,7 +3,7 @@ from django_filters import rest_framework as filters
 
 from office.models import Payment
 from office.serializers.payment_serializer import PaymentSerializer
-from office.pagination import StandardResultsSetPagination
+from pagination.default_pagination import StandardResultsSetPagination
 from office.filter import PaymentFilter
 
 
