@@ -15,6 +15,7 @@ import environ
 import logging.config
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -219,3 +220,10 @@ sentry_sdk.init(
     traces_sample_rate=1.0,
     send_default_pii=True,
 )
+
+# S3 bucket configuration
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'YOUR_ACCESS_KEY_HERE'
+AWS_STORAGE_BUCKET_NAME = 'herculesbucket'
+AWS_SECRET_ACCESS_KEY = 'YOUR_SECRET_ACCESS_KEY_HERE'
+AWS_QUERYSTRING_AUTH = False
