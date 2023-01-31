@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from office.models import Task, Project
 from office.serializers.task_serializer import TaskSerializer
-from office.pagination import StandardResultsSetPagination
+from pagination.default_pagination import StandardResultsSetPagination
 from utils.employee_info import Evolution
 from utils.response import prepare_success_response, prepare_error_response
 

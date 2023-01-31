@@ -28,3 +28,18 @@ class CrewOrderSearchByCalender(views.APIView):
             }
             issues.append(data)
         return Response(prepare_success_response(issues), status=status.HTTP_200_OK)
+
+
+class OfferListFilterAPIView(generics.ListAPIView):
+    queryset = Offer.objects.all()
+    serializer_class = offer_serializer.OfferSerializer
+    pagination_class = OfferPagination
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ['is_publish']
+
+    def get_queryset(self):
+        queryset = Offer.objects.all()
+        is_save = self.request.query_params.get("is_save")
+        if is_save is not None:
+            queryset = queryset.filter(offers__isnull=False)
+        return queryset
