@@ -3,10 +3,9 @@ from django_filters import rest_framework as filters
 from rest_framework.response import Response
 
 from office.models import Task, Project
+from utils import response, employee_info
 from office.serializers.task_serializer import TaskSerializer
 from pagination.default_pagination import StandardResultsSetPagination
-from utils.employee_info import Evolution
-from utils.response import prepare_success_response, prepare_error_response
 
 
 class TaskFilter(filters.FilterSet):
@@ -53,11 +52,11 @@ class CompleteTaskListAPIView(views.APIView):
 
     def get(self, request):
         try:
-            complete_task = Task.objects.filter(status=Evolution.DONE)
+            complete_task = Task.objects.filter(status=employee_info.Evolution.DONE)
             serializer = TaskSerializer(complete_task, many=True)
-            return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+            return Response(response.prepare_success_response(serializer.data), status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
-                prepare_error_response(e),
+                response.prepare_error_response(e),
                 status=status.HTTP_400_BAD_REQUEST
             )
