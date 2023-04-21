@@ -11,6 +11,6 @@ psycopg2-binary==2.9.3
 PyJWT==2.4.0
 pytz==2021.3
 sentry-sdk==1.14.0
-sqlparse==0.4.2
+sqlparse==0.4.4
 urllib3==1.26.12
 django-extra-fields==3.0.2
