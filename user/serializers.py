@@ -6,6 +6,7 @@ from .models import Profile
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """User basic serializer"""
     class Meta:
         model = User
         fields = (
@@ -14,6 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    """
+    User create/registration serializer with validation
+    """
     email = serializers.EmailField()
     password = serializers.CharField(style={'input_type': 'password', 'placeholder': 'Password'})
 
@@ -51,6 +55,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    """
+    User profile serializer
+    """
     class Meta:
         read_only_fields = ('user',)
         model = Profile
@@ -58,6 +65,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class PasswordChangeSerializer(serializers.ModelSerializer):
+    """
+    user can change his/her password after login
+    """
     old_password = serializers.CharField(write_only=True, required=True)
     new_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True, required=True)
