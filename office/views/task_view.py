@@ -9,7 +9,6 @@ from office.serializers.task_serializer import TaskSerializer
 from pagination.default_pagination import StandardResultsSetPagination
 
 
-
 class TaskViewSet(viewsets.ModelViewSet):
     """
     Create Task API CRUD API
