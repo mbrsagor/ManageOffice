@@ -2,18 +2,12 @@ from rest_framework import viewsets, views, generics, permissions, status
 from django_filters import rest_framework as filters
 from rest_framework.response import Response
 
-from office.models import Task, Project
+from office.models import Task
 from utils import response, employee_info
+from utils.filter_utils import TaskFilter
 from office.serializers.task_serializer import TaskSerializer
 from pagination.default_pagination import StandardResultsSetPagination
 
-
-class TaskFilter(filters.FilterSet):
-    project_name = filters.ModelChoiceFilter(field_name='project_name', queryset=Project.objects.all())
-
-    class Meta:
-        model = Task
-        fields = ['project']
 
 
 class TaskViewSet(viewsets.ModelViewSet):
