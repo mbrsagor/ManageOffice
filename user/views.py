@@ -1,13 +1,14 @@
-from rest_framework import views, status, permissions, generics
 from rest_framework.response import Response
+from rest_framework import views, status, permissions, generics
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
+
 from django.contrib.auth.models import User
 
+from utils import response
 from .models import Profile
-from utils.message import LOGIN_MSG, LOGOUT_MSG, NO_ID
+from utils.message import LOGOUT_MSG, NO_ID
 from .serializers import ProfileSerializer, UserSerializer, RegistrationSerializer, PasswordChangeSerializer
-from utils.response import prepare_success_response, prepare_create_success_response, prepare_error_response
 
 
 class UserRegistrationAPIView(views.APIView):
@@ -23,10 +24,10 @@ class UserRegistrationAPIView(views.APIView):
             serializer = RegistrationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
-            return Response(prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+                return Response(response.prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
+            return Response(response.prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
         except Exception as ex:
-            return Response(prepare_error_response(str(ex)), status=status.HTTP_403_FORBIDDEN)
+            return Response(response.prepare_error_response(str(ex)), status=status.HTTP_403_FORBIDDEN)
 
 
 class LoginAPIView(ObtainAuthToken):
@@ -43,13 +44,9 @@ class LoginAPIView(ObtainAuthToken):
             serializer.is_valid(raise_exception=True)
             token, created = Token.objects.get_or_create(user=serializer.validated_data['user'])
             user = serializer.validated_data['user']
-            return Response({
-                'token': token.key,
-                'user_id': user.pk,
-                'message': LOGIN_MSG
-            }, status=status.HTTP_200_OK)
+            return Response(response.prepare_signin_success_response(token.key, user.pk), status=status.HTTP_200_OK)
         except Exception as ex:
-            return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
+            return Response(response.prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProfileAPIView(views.APIView):
@@ -64,12 +61,12 @@ class ProfileAPIView(views.APIView):
         try:
             queryset = Profile.objects.get(id=self.request.user.id)
             serializer = ProfileSerializer(queryset)
-            return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+            return Response(response.prepare_success_response(serializer.data), status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
             queryset = User.objects.get(id=self.request.user.id)
             serializer = UserSerializer(queryset)
-            return Response(prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+            return Response(response.prepare_success_response(serializer.data), status=status.HTTP_200_OK)
 
 
 class ProfileUpdateAPIView(views.APIView):
@@ -87,12 +84,12 @@ class ProfileUpdateAPIView(views.APIView):
                 serializer = ProfileSerializer(profile, data=request.data)
                 if serializer.is_valid(raise_exception=True):
                     serializer.save(user=request.user)
-                    return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
-                return Response(prepare_create_success_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+                    return Response(response.prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
+                return Response(response.prepare_create_success_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
             else:
-                return Response(prepare_error_response(NO_ID), status=status.HTTP_403_FORBIDDEN)
+                return Response(response.prepare_error_response(NO_ID), status=status.HTTP_403_FORBIDDEN)
         except Exception as ex:
-            return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
+            return Response(response.prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
 
 
 class ChangePasswordView(generics.UpdateAPIView):
@@ -110,10 +107,10 @@ class ChangePasswordView(generics.UpdateAPIView):
             serializer = PasswordChangeSerializer()
             if serializer.is_valid(raise_exception=True):
                 serializer.save(user=self.request.user)
-                return Response(prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
-            return Response(prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+                return Response(response.prepare_create_success_response(serializer.data), status=status.HTTP_201_CREATED)
+            return Response(response.prepare_error_response(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
         except Exception as ex:
-            return Response(prepare_error_response(str(ex)), status=status.HTTP_403_FORBIDDEN)
+            return Response(response.prepare_error_response(str(ex)), status=status.HTTP_403_FORBIDDEN)
 
 
 class LogoutAPIView(views.APIView):
@@ -127,6 +124,6 @@ class LogoutAPIView(views.APIView):
     def get(self, request):
         try:
             request.user.auth_token.delete()
-            return Response(prepare_success_response(LOGOUT_MSG), status=status.HTTP_200_OK)
+            return Response(response.prepare_success_response(LOGOUT_MSG), status=status.HTTP_200_OK)
         except Exception as ex:
-            return Response(prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
+            return Response(response.prepare_error_response(str(ex)), status=status.HTTP_400_BAD_REQUEST)
