@@ -59,14 +59,15 @@ class ProfileAPIView(views.APIView):
 
     def get(self, request):
         try:
-            queryset = Profile.objects.get(id=self.request.user.id)
-            serializer = ProfileSerializer(queryset)
+            profile = Profile.objects.get(id=self.request.user.id)
+            serializer = ProfileSerializer(profile)
             return Response(response.prepare_success_response(serializer.data), status=status.HTTP_200_OK)
         except Exception as e:
-            print(e)
-            queryset = User.objects.get(id=self.request.user.id)
-            serializer = UserSerializer(queryset)
-            return Response(response.prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+            user = User.objects.get(id=self.request.user.id)
+            if user is not None:
+                serializer = UserSerializer(user)
+                return Response(response.prepare_success_response(serializer.data), status=status.HTTP_200_OK)
+            return Response(response.prepare_error_response(str(e)), status=status.HTTP_200_OK)
 
 
 class ProfileUpdateAPIView(views.APIView):
