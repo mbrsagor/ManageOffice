@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from office.models import Task
 from utils import response, employee_info
+from utils.fcm_manager import send_notification
 from utils.filter_utils import TaskFilter
 from office.serializers.task_serializer import TaskSerializer
 from pagination.default_pagination import StandardResultsSetPagination
@@ -19,6 +20,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     pagination_class = StandardResultsSetPagination
 
     def perform_create(self, serializer):
+        send_notification('device_token', 'title', 'message')
         return serializer.save(assigned_by=self.request.user)
 
     def perform_update(self, serializer):
