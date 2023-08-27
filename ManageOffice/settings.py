@@ -23,7 +23,6 @@ env = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=list,
 )
-
 env_path = os.path.join(BASE_DIR, '.env')
 environ.Env.read_env(env_path)
 
@@ -177,3 +176,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8000"
 ]
+
+# AWS S3 Configuration
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_SIGNATURE_NAME = env('AWS_S3_SIGNATURE_NAME')
+AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
+AWS_S3_FILE_OVERWRITE = env('AWS_S3_FILE_OVERWRITE')
+AWS_DEFAULT_ACL = None
+AWS_S3_VERITY = env('AWS_S3_VERITY')
+DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
