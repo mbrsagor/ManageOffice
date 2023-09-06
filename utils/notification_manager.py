@@ -25,8 +25,7 @@ def send_notification_to_all(title, message, icon=None, picture=None):
         "contents": {"en": message},
     }
 
-    response = requests.post(url, json=body, headers=headers)
-    return response
+    return requests.post(url, json=body, headers=headers)
 
 
 # The notification will throw for single user
@@ -41,5 +40,4 @@ def send_notification_single_user(device_token, title, message, icon=None, pictu
         "contents": {"en": message},
     }
 
-    response = requests.post(url, json=body, headers=headers)
-    return response
+    return requests.post(url, json=body, headers=headers)
